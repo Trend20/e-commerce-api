@@ -3,6 +3,9 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+// routes
+const userRouter = require('./routes/User');
+
 // simple route for testing
 app.get('/', (req, res) =>{
   res.send('Application running successfully')
@@ -20,11 +23,14 @@ mongoose.connect(db_url, {useNewUrlParser: true})
         .catch((error) =>{
           console.log(error);
         })
-        
+
 // USE MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// use the routes
+app.use('/api/users', userRouter);
 
 // initialize a port
 const PORT = process.env.PORT || 9000;
