@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { boolean } = require('webidl-conversions');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -19,9 +20,8 @@ const UserSchema = new mongoose.Schema({
   isAdmin: {
     type: boolean,
     default: true,
-  },
-  timestamps: true
-})
+  }
+},{timestamps: true})
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
