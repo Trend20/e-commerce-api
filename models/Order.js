@@ -1,32 +1,34 @@
 const mongoose = require('mongoose');
-const {boolean} = require('webidl-conversions')
 
-const UserSchema = new mongoose.Schema({
- title: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  description: {
+const OrderSchema = new mongoose.Schema({
+ userId: {
     type: String,
     required: true
   },
-  img: {
-    type: String,
-    required: true
-  },
-  categories: {
-    type: Array
-  },
-  size: {
-    type: String
-  },
-
-  price: {
+  products: [
+    {
+      productId:{
+        type: String
+      },
+      quantity:{
+        type: Number,
+        default: 1
+      }
+    }
+  ],
+  amount: {
     type: Number,
     required: true
   },
+  address: {
+    type: Object, 
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "pending"
+  }
 },{timestamps: true})
 
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+const Order = mongoose.model('Order', OrderSchema);
+module.exports = Order;
