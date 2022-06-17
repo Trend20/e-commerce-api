@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { boolean } = require('webidl-conversions');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -18,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     unique: true
   },
   isAdmin: {
-    type: boolean,
+    type: Boolean,
     default: true,
   }
 },{timestamps: true})
