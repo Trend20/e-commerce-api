@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 // routes
 const userRouter = require('./routes/User');
+const authRouter = require('./routes/Auth');
 
 // simple route for testing
 app.get('/', (req, res) =>{
@@ -31,6 +32,7 @@ app.use(express.urlencoded({extended: true}));
 
 // use the routes
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 
 // initialize a port
 const PORT = process.env.PORT || 9000;
