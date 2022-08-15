@@ -16,8 +16,8 @@ router.post('/register', async (req, res) =>{
   })
 
   try{
-    await newUser.save();
-    return res.status(201).json(newUser);
+    const savedUser = await newUser.save();
+    return res.status(201).json(savedUser);
   }catch(error){
     return res.status(500).json(error)
   }
@@ -30,13 +30,13 @@ router.post('/login', async (req, res) =>{
 
    
     if(!user){
-      return res.status(401).json('Wrong Credentials!');
+      return res.status(401).json('Wrong Username!');
     }
     const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_KEY);
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
     if(OriginalPassword !== req.body.password){
-      return res.status(401).json('Wrong Credentials!');
+      return res.status(401).json('Wrong Password!');
     }
 
     // access token
